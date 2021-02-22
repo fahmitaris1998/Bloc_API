@@ -1,0 +1,35 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_api_bloc/models/user.dart';
+
+class CardProfile extends StatelessWidget {
+  final User user;
+
+  const CardProfile({Key key, this.user}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.symmetric(horizontal: 20.0),
+      padding: EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+        color: Colors.orange,
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: Row(
+        children: [
+          ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: Image(image: NetworkImage(user.avatar),height: 75.0,width: 75.0,)),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("ID : "+ user.id.toString()),
+              Text("Nama : "+ user.firstName +" "+user.lastName),
+              Text("Email : "+user.email)
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
