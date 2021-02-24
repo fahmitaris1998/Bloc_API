@@ -21,10 +21,11 @@ class UserApiProvider{
   
   Future addData(title) async{
     print('klik api create');
-    final response = await client.post('https://reqres.in/api/users',body:{
-      "name": "morpheus",
-      "job": title
+    var response = await client.post('http://192.168.13.102:3000/api/create',body:{
+      "name": title,
+      "done": "oke",
     });
+    print("inisii");
 
     if(response.statusCode == 200){
       return response;
