@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_api_bloc/ui/create.dart';
 import 'package:flutter_api_bloc/ui/home.dart';
 
+import 'ui/home.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -11,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -45,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Create()
+      body: Home()
      );
   }
 }

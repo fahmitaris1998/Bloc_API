@@ -1,43 +1,46 @@
-
 import 'dart:convert';
 
-List<User> userFromJson(String str) {
-  final jsonData = json.decode(str);
-  return new List<User>.from(jsonData['data'].map((x) => User.fromJson(x)));
-}
+List<User> userFromJson(String str) => List<User>.from(json.decode(str).map((x) => User.fromJson(x)));
 
-String userToJson(List<User> data) {
-  final dyn = new List<dynamic>.from(data.map((x) => x.toJson()));
-  return json.encode(dyn);
-}
+String userToJson(List<User> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class User {
   User({
-    this.id,
-    this.email,
-    this.firstName,
-    this.lastName,
-    this.avatar,
+    this.idUser,
+    this.nama,
+    this.jenisKelamin,
+    this.idParent,
   });
 
-  int id;
-  String email;
-  String firstName;
-  String lastName;
-  String avatar;
+  String idUser;
+  String nama;
+  String jenisKelamin;
+  String idParent;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    id: json["id"],
-    email: json["email"],
-    firstName: json["first_name"],
-    lastName: json["last_name"],
-    avatar: json["avatar"],
+    idUser: json["ID_user"],
+    nama: json["nama"],
+    jenisKelamin: json["jenis_kelamin"],
+    idParent: json["ID_parent"],
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "email": email,
-    "first_name": firstName,
-    "last_name": lastName,
-    "avatar": avatar,
+    "ID_user": idUser,
+    "nama": nama,
+    "jenis_kelamin": jenisKelamin,
+    "ID_parent": idParent,
   };
+}
+class EnumValues<T> {
+  Map<String, T> map;
+  Map<T, String> reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String> get reverse {
+    if (reverseMap == null) {
+      reverseMap = map.map((k, v) => new MapEntry(v, k));
+    }
+    return reverseMap;
+  }
 }

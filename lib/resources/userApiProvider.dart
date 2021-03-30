@@ -5,7 +5,7 @@ import 'package:flutter_api_bloc/models/user.dart';
 import 'dart:async';
 class UserApiProvider{
   Client client = Client();
-  final _url= 'https://reqres.in/api/users/?page=1';
+  final _url= 'http://192.168.13.107/read.php';
 
   Future<List<User>> fetchuserlist() async{
     print("masuk");
@@ -19,11 +19,12 @@ class UserApiProvider{
     }
   }
   
-  Future addData(title) async{
+  Future addData(title,jk,idparent) async{
     print('klik api create');
-    var response = await client.post('http://192.168.13.102:3000/api/create',body:{
-      "name": title,
-      "done": "oke",
+    var response = await client.post('http://192.168.13.107/create.php',body:{
+      "nama": title,
+      "jeniskelamin": jk,
+      "idparent":idparent
     });
     print("inisii");
 
@@ -32,6 +33,40 @@ class UserApiProvider{
     }else{
       throw Exception('failed Add data');
     }
+
+
+  }
+
+  Future updateData(iduser,title,jk,idparent) async{
+    print('klik api update');
+    var response = await client.post('http://192.168.13.107/update.php',body:{
+      "id_user":iduser,
+      "nama": title,
+      "jeniskelamin": jk,
+      "idparent":idparent
+    });
+    print("inisii");
+
+    if(response.statusCode == 200){
+      return response;
+    }else{
+      throw Exception('failed update data');
+    }
+  }
+
+  Future deletedata(iduser) async{
+    print("klik API delete");
+    var url= 'http://192.168.13.107/delete.php';
+    var response = await client.post(url,body: {
+      'iduser':iduser
+    });
+
+    if(response.statusCode == 200){
+      return response;
+    }else{
+      throw Exception('failed update data');
+    }
+
   }
 
 }
